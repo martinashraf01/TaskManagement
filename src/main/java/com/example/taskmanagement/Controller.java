@@ -15,7 +15,7 @@ public class Controller {
     Vector<Task>myDay;
     User CurrentUser ;
 
-
+    @FXML
     private Button addNewTaskBT;
 
     @FXML
@@ -49,13 +49,12 @@ public class Controller {
     private TextField uesername;
     @FXML
     void addNewTaskHandler(MouseEvent event) {
-//        Task x = new Task("rghr",3, new Date(),"disisiacnadc");
-//        printTask(x,allTasksList);
+        Task x = new Task("rghr",2, new Date(),"disisiacnadc");
+        printTask(x,allTasksList);
     }
 
     @FXML
     void addNewUserHandler(MouseEvent event) {
-
     }
 
 
@@ -92,9 +91,38 @@ public class Controller {
         return null;
     }
 
-    void printTask(Task t , ListView listView){
+    public void printTask(Task t, ListView<Task> listView) {
         listView.getItems().add(t);
-        listView.backgroundProperty()
+
+        // Set background color based on priority using a lambda expression
+        listView.setCellFactory(cellFactory -> new ListCell<Task>() {
+            @Override
+            protected void updateItem(Task item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setText(null);
+                    setStyle(null);
+                } else {
+                    setText(item.toString()); // Assuming Task has a meaningful toString() method
+
+                    // Set background color based on priority
+                    switch (item.priority) {
+                        case 3:
+                            setStyle("-fx-text-fill: FF5733");
+                            break;
+                        case 2:
+                            setStyle("-fx-text-fill: C3BB13");
+                            break;
+                        case 1:
+                            setStyle("-fx-text-fill: 13C33E");
+                            break;
+                        default:
+                            // Handle default case (optional)
+                    }
+                }
+            }
+        });
     }
+
 
 }
