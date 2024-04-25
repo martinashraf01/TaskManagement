@@ -3,13 +3,17 @@ package com.example.taskmanagement;
 import java.util.Date;
 
 public class Task implements Comparable<Task>{
+    private static int count =0;
+    int taskID;
     String taskName;
     int priority;
     Date deadLine;
     String taskDiscription;
-    boolean finished;
+
 
     public Task(String taskName, int priority, Date deadLine ,String taskDiscription) {
+        taskID = count;
+        count++;
         this.taskName = taskName;
         this.priority = priority;
         this.deadLine = deadLine;
@@ -22,5 +26,10 @@ public class Task implements Comparable<Task>{
     @Override
     public int compareTo(Task o) {
         return deadLine.compareTo(o.deadLine);
+    }
+
+    @Override
+    public String toString() {
+        return taskName +"||deadLine=" + deadLine;
     }
 }

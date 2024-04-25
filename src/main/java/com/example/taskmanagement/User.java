@@ -13,6 +13,14 @@ public class User {
         this.tasks = new ArrayList<>();
     }
 
+    public String getUserName() {
+        return userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
     void sortTasks(){
         Collections.sort(tasks);
     }
