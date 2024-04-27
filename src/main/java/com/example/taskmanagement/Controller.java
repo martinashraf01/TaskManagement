@@ -10,7 +10,7 @@ import java.util.Optional;
 import java.util.Vector;
 
 public class Controller {
-    static Vector<Task> allTasks ;
+    static Vector<Task> allTasks = new Vector<>() ;
     static Vector<User>allUsers=new Vector<>();
     Vector<Task>myDay;
     User CurrentUser ;
@@ -47,6 +47,15 @@ public class Controller {
 
     @FXML
     private TextField uesername;
+
+    @FXML
+    void initialize() {
+        addNewTaskBT.setVisible(false);
+        addNewUserBT.setVisible(false);
+
+    }
+
+
     @FXML
     void addNewTaskHandler(MouseEvent event) {
         Task x = new Task("rghr",2, new Date(),"disisiacnadc");
@@ -70,8 +79,48 @@ public class Controller {
 
     @FXML
     void signInHandler(MouseEvent event) {
+        String username = uesername.getText(); // Get the text content of the username field
+        String pass = password.getText(); // Get the text content of the password field
 
+        if (username.equals("admin") && pass.equals("admin")) {
+            addNewTaskBT.setVisible(true);
+            addNewUserBT.setVisible(true);
+            // Assuming allTasks is a Vector containing tasks
+            for (Task task : allTasks) {
+                printTask(task, allTasksList);
+            }
+
+        } else {
+            boolean userExists = false;
+            for (User user : allUsers) {
+                if ((user.getUserName()).equals(username)) {
+                    userExists = true;
+                    if (user.getPassword().equals(pass)) {
+                        for (Task task : user.tasks) {
+                            printTask(task, allTasksList);
+                        }
+                    } else {
+                        showAlert("Error", "Incorrect password!", Alert.AlertType.ERROR);
+                    }
+                    return;
+                }
+            }
+            if (!userExists) {
+                showAlert("Error", "Username doesn't exist!", Alert.AlertType.ERROR);
+            }
+        }
     }
+
+    private void showAlert(String title, String content, Alert.AlertType alertType) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
+
+
+
+
 
     @FXML
     void startSprintHandler(MouseEvent event) {
@@ -80,7 +129,7 @@ public class Controller {
 
     public User getUser(String username){
         for (User x:
-             allUsers) {
+                allUsers) {
             if (x.getUserName().equals(username))
                 return x;
         }
