@@ -5,13 +5,15 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Optional;
 import java.util.Vector;
 
 public class Controller {
     static Vector<Task> allTasks = new Vector<>() ;
     static Vector<User>allUsers=new Vector<>();
+    static Vector<Task> deadlineTasks ;
+
     Vector<Task>myDay;
     User CurrentUser ;
 
@@ -53,13 +55,24 @@ public class Controller {
         addNewTaskBT.setVisible(false);
         addNewUserBT.setVisible(false);
 
+        Task t1 = new Task("L",1,LocalDate.of(2024, 4, 27),"sdkhbakhshvc");
+        Task t2 = new Task("p",2,LocalDate.of(2024, 4, 27),"sdkhbakhghshvc");
+        Task t3 = new Task("K",3,LocalDate.of(2024, 4, 27),"sdkhbakhljshvc");
+        allTasks.add(t1);
+        allTasks.add(t2);
+        allTasks.add(t3);
+        User u1 = new User("User","3454");
+        User u2 = new User("user","9999");
+        allUsers.add(u1);
+        allUsers.add(u2);
+        u1.addTask(t1);
+        u1.addTask(t3);
     }
 
 
     @FXML
     void addNewTaskHandler(MouseEvent event) {
-        Task x = new Task("rghr",2, new Date(),"disisiacnadc");
-        printTask(x,allTasksList);
+
     }
 
     @FXML
@@ -79,34 +92,52 @@ public class Controller {
 
     @FXML
     void signInHandler(MouseEvent event) {
+        User user ;
         String username = uesername.getText(); // Get the text content of the username field
         String pass = password.getText(); // Get the text content of the password field
+        allTasksList.getItems().clear();
+        deadlineTasks = new Vector<>();
 
         if (username.equals("admin") && pass.equals("admin")) {
             addNewTaskBT.setVisible(true);
             addNewUserBT.setVisible(true);
+            boolean DeadlineAlert = false;
             // Assuming allTasks is a Vector containing tasks
             for (Task task : allTasks) {
                 printTask(task, allTasksList);
-            }
-
-        } else {
-            boolean userExists = false;
-            for (User user : allUsers) {
-                if ((user.getUserName()).equals(username)) {
-                    userExists = true;
-                    if (user.getPassword().equals(pass)) {
-                        for (Task task : user.tasks) {
-                            printTask(task, allTasksList);
-                        }
-                    } else {
-                        showAlert("Error", "Incorrect password!", Alert.AlertType.ERROR);
-                    }
-                    return;
+                if((task.deadLine).equals(LocalDate.now())){
+                    DeadlineAlert = true;
+                    deadlineTasks.add(task);
                 }
             }
-            if (!userExists) {
-                showAlert("Error", "Username doesn't exist!", Alert.AlertType.ERROR);
+            if(DeadlineAlert){
+                String tasksSting = (deadlineTasks.toString()).replaceAll(", ", "\n");
+                showAlert("Alert", "Tasks with today's deadline:\n" + tasksSting, Alert.AlertType.WARNING);
+            }
+
+
+        } else {
+            user = getUser(username);
+            if (user != null) {
+                if (user.getPassword().equals(pass)) {
+                    addNewTaskBT.setVisible(false);
+                    addNewUserBT.setVisible(false);
+                    CurrentUser = user;
+                    Boolean DeadlineAlert =false;
+                    for (Task task : user.tasks) {
+                        printTask(task, allTasksList);
+                        if((task.deadLine).equals(LocalDate.now())){
+                            DeadlineAlert = true;
+                            deadlineTasks.add(task);
+                        }
+                    }
+                    if(DeadlineAlert){
+                        String tasksSting = (deadlineTasks.toString()).replaceAll(", ", "\n");
+                        showAlert("Alert", "Tasks with today's deadline:\n" + tasksSting, Alert.AlertType.WARNING);
+                    }
+                } else {
+                    showAlert("Error", "Incorrect password!", Alert.AlertType.ERROR);
+                }
             }
         }
     }
@@ -117,6 +148,8 @@ public class Controller {
         alert.setContentText(content);
         alert.showAndWait();
     }
+
+
 
 
 

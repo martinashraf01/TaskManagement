@@ -1,17 +1,17 @@
 package com.example.taskmanagement;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Task implements Comparable<Task>{
     private static int count =0;
     int taskID;
     String taskName;
     int priority;
-    Date deadLine;
+    LocalDate deadLine;
     String taskDiscription;
 
 
-    public Task(String taskName, int priority, Date deadLine ,String taskDiscription) {
+    public Task(String taskName, int priority, LocalDate deadLine ,String taskDiscription) {
         taskID = count;
         count++;
         this.taskName = taskName;
@@ -32,5 +32,7 @@ public class Task implements Comparable<Task>{
     public String toString() {
         return taskName +"||deadLine=" + deadLine;
     }
+
+
 }
 
