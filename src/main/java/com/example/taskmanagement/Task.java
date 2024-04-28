@@ -30,9 +30,12 @@ public class Task implements Comparable<Task>{
 
     @Override
     public String toString() {
-        return taskName +"||deadLine=" + deadLine;
+        return taskName +"|| deadLine(" + deadLine+")";
     }
 
+    static int getCount(){
+        return count;
+    }
 
 }
 

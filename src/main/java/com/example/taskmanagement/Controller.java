@@ -1,20 +1,24 @@
 package com.example.taskmanagement;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Optional;
 import java.util.Vector;
 
-public class Controller {
+public class Controller implements  Listupdater{
+    static Listupdater  listupdater;
     static Vector<Task> allTasks = new Vector<>() ;
     static Vector<User>allUsers=new Vector<>();
     static Vector<Task> deadlineTasks ;
 
-    Vector<Task>myDay;
     User CurrentUser ;
 
     @FXML
@@ -50,29 +54,17 @@ public class Controller {
     @FXML
     private TextField uesername;
 
-    @FXML
-    void initialize() {
-        addNewTaskBT.setVisible(false);
-        addNewUserBT.setVisible(false);
 
-        Task t1 = new Task("L",1,LocalDate.of(2024, 4, 27),"sdkhbakhshvc");
-        Task t2 = new Task("p",2,LocalDate.of(2024, 4, 27),"sdkhbakhghshvc");
-        Task t3 = new Task("K",3,LocalDate.of(2024, 4, 27),"sdkhbakhljshvc");
-        allTasks.add(t1);
-        allTasks.add(t2);
-        allTasks.add(t3);
-        User u1 = new User("User","3454");
-        User u2 = new User("user","9999");
-        allUsers.add(u1);
-        allUsers.add(u2);
-        u1.addTask(t1);
-        u1.addTask(t3);
-    }
 
 
     @FXML
-    void addNewTaskHandler(MouseEvent event) {
-
+    void addNewTaskHandler(MouseEvent event) throws IOException {
+        FXMLLoader fxmlLoader=new FXMLLoader(getClass().getResource("AddNewTask.fxml"));
+        Stage newStage = new Stage();
+        Scene scene = new Scene(fxmlLoader.load());
+        newStage.setTitle("add_new_task");
+        newStage.setScene(scene);
+        newStage.show();
     }
 
     @FXML
@@ -96,6 +88,7 @@ public class Controller {
         String username = uesername.getText(); // Get the text content of the username field
         String pass = password.getText(); // Get the text content of the password field
         allTasksList.getItems().clear();
+        myDayList.getItems().clear();
         deadlineTasks = new Vector<>();
 
         if (username.equals("admin") && pass.equals("admin")) {
@@ -142,7 +135,7 @@ public class Controller {
         }
     }
 
-    private void showAlert(String title, String content, Alert.AlertType alertType) {
+    public static void showAlert(String title, String content, Alert.AlertType alertType) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
         alert.setContentText(content);
@@ -160,7 +153,7 @@ public class Controller {
 
     }
 
-    public User getUser(String username){
+    public static User getUser(String username){
         for (User x:
                 allUsers) {
             if (x.getUserName().equals(username))
@@ -206,5 +199,30 @@ public class Controller {
         });
     }
 
+    public void printinalltasks(Task f){
+        printTask(f,allTasksList);
+    }
 
+
+    @FXML
+    void initialize() {
+
+        listupdater= this;
+        addNewTaskBT.setVisible(false);
+        addNewUserBT.setVisible(false);
+
+
+/*test part*/
+//        Task t1 = new Task("L",1,LocalDate.of(2024, 4, 28),"sdkhbakhshvc");
+//        Task t2 = new Task("p",2,LocalDate.of(2024, 4, 27),"sdkhbakhghshvc");
+//        Task t3 = new Task("K",3,LocalDate.of(2024, 4, 27),"sdkhbakhljshvc");
+//        allTasks.add(t1);
+//        allTasks.add(t2);
+//        allTasks.add(t3);
+//        User u1 = new User("User","3454");
+//
+//        allUsers.add(u1);
+//        u1.addTask(t1);
+//        u1.addTask(t3);
+    }
 }

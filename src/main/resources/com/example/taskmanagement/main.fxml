@@ -11,6 +11,8 @@
 <AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="631.0" prefWidth="785.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.taskmanagement.Controller">
    <children>
       <TextField fx:id="uesername" layoutX="31.0" layoutY="35.0" prefHeight="26.0" prefWidth="117.0" promptText="username" />
+      <PasswordField fx:id="password" layoutX="30.0" layoutY="71.0" prefHeight="26.0" prefWidth="118.0" promptText="password" />
+      <Button fx:id="signInBT" layoutX="160.0" layoutY="35.0" mnemonicParsing="false" onMouseClicked="#signInHandler" text="sign in " />
       <Label layoutX="525.0" layoutY="131.0" text="all tasks" textFill="#b53131">
          <font>
             <Font name="DejaVu Serif" size="31.0" />
@@ -22,13 +24,12 @@
          </font>
       </Label>
       <ListView fx:id="allTasksList" layoutX="425.0" layoutY="188.0" prefHeight="254.0" prefWidth="315.0" />
-      <Button fx:id="signInBT" layoutX="160.0" layoutY="35.0" mnemonicParsing="false" onMouseClicked="#signInHandler" text="sign in " />
+
       <Button fx:id="startSprintBT" layoutX="162.0" layoutY="466.0" mnemonicParsing="false" onMouseClicked="#startSprintHandler" text="start sprint" />
       <ListView fx:id="myDayList" layoutX="41.0" layoutY="190.0" prefHeight="254.0" prefWidth="315.0" />
       <Button fx:id="addToMyDayBT" layoutX="536.0" layoutY="466.0" mnemonicParsing="false" onMouseClicked="#addTomyDayHandler" prefHeight="26.0" prefWidth="118.0" text="add to my day" />
       <Button fx:id="addNewUserBT" layoutX="258.0" layoutY="562.0" mnemonicParsing="false" onMouseClicked="#addNewUserHandler" text="add new user " />
       <Button fx:id="addNewTaskBT" layoutX="410.0" layoutY="562.0" mnemonicParsing="false" onMouseClicked="#addNewTaskHandler" text="add new task" />
       <Button fx:id="taskDiskBT" layoutX="536.0" layoutY="504.0" mnemonicParsing="false" onMouseClicked="#seeTaskDiskHandler" text="see task discription" />
-      <PasswordField fx:id="password" layoutX="30.0" layoutY="71.0" prefHeight="26.0" prefWidth="118.0" promptText="password" />
-   </children>
+      </children>
 </AnchorPane>
