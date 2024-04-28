@@ -68,7 +68,13 @@ public class Controller implements  Listupdater{
     }
 
     @FXML
-    void addNewUserHandler(MouseEvent event) {
+    void addNewUserHandler(MouseEvent event) throws IOException {
+        FXMLLoader fxmlLoader=new FXMLLoader(getClass().getResource("AddNewUserWindow.fxml"));
+        Stage newStage = new Stage();
+        Scene scene = new Scene(fxmlLoader.load());
+        newStage.setTitle("Create_User");
+        newStage.setScene(scene);
+        newStage.show();
     }
 
 
