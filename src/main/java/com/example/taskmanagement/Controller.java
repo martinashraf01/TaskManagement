@@ -80,12 +80,32 @@ public class Controller implements  Listupdater{
 
     @FXML
     void addTomyDayHandler(MouseEvent event) {
-
+        Task selectedTask = allTasksList.getSelectionModel().getSelectedItem();
+        if(selectedTask != null) printTask(selectedTask,myDayList);
     }
 
+    public static String taskname=null;
+    public static String taskdescription=null;
     @FXML
-    void seeTaskDiskHandler(MouseEvent event) {
-
+    void seeTaskDiskHandler(MouseEvent event) throws IOException {
+        Task currentT;
+        try {
+            currentT = allTasksList.getSelectionModel().getSelectedItem();
+//            System.out.println(currentT);
+            if(currentT != null) {
+                taskname = currentT.taskName;
+                taskdescription = currentT.taskDiscription;
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("TaskDescription.fxml"));
+                Stage newstage = new Stage();
+                Scene scene = new Scene(fxmlLoader.load());
+                newstage.setTitle("Task Description");
+                newstage.setScene(scene);
+                newstage.show();
+            }
+        }
+        catch(Exception e){
+            return ;
+        }
     }
 
     @FXML
