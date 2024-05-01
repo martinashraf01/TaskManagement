@@ -1,5 +1,6 @@
 package com.example.taskmanagement;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -53,6 +54,15 @@ public class Controller implements  Listupdater{
 
     @FXML
     private TextField uesername;
+
+    @FXML
+    private Button viewAllTasksBT;
+
+    @FXML
+    private ChoiceBox<User> taskBox;
+
+    @FXML
+    Label TaskBokLabel;
 
 
 
@@ -109,6 +119,36 @@ public class Controller implements  Listupdater{
     }
 
     @FXML
+    void taskBoxHandler(MouseEvent event){
+        taskBox.getItems().clear();
+        for(User user : allUsers) {
+            taskBox.getItems().add(user);
+        }
+        taskBox.setOnAction(this::getUserTasks);
+    }
+
+    void getUserTasks(ActionEvent event){
+        allTasksList.getItems().clear();
+        myDayList.getItems().clear();
+        User u = taskBox.getValue();
+        for (Task task : u.tasks) {
+            printTask(task, allTasksList);
+            if((task.deadLine).equals(LocalDate.now())){
+                deadlineTasks.add(task);
+            }
+        }
+    }
+
+    @FXML
+    void viewAllTasksHandler(MouseEvent event){
+        allTasksList.getItems().clear();
+        myDayList.getItems().clear();
+        for (Task task : allTasks) {
+            printTask(task, allTasksList);
+        }
+    }
+
+    @FXML
     void signInHandler(MouseEvent event) {
         User user ;
         String username = uesername.getText(); // Get the text content of the username field
@@ -118,8 +158,20 @@ public class Controller implements  Listupdater{
         deadlineTasks = new Vector<>();
 
         if (username.equals("admin") && pass.equals("admin")) {
+
+            taskBox.getItems().clear();
+            for(User u : allUsers) {
+                taskBox.getItems().add(u);
+            }
+            taskBox.setOnAction(this::getUserTasks);
+
             addNewTaskBT.setVisible(true);
             addNewUserBT.setVisible(true);
+            viewAllTasksBT.setVisible(true);
+            taskBox.setVisible(true);
+            TaskBokLabel.setVisible(true);
+            CurrentUser = null;
+
             boolean DeadlineAlert = false;
             // Assuming allTasks is a Vector containing tasks
             for (Task task : allTasks) {
@@ -141,6 +193,10 @@ public class Controller implements  Listupdater{
                 if (user.getPassword().equals(pass)) {
                     addNewTaskBT.setVisible(false);
                     addNewUserBT.setVisible(false);
+                    viewAllTasksBT.setVisible(false);
+                    taskBox.setVisible(false);
+                    TaskBokLabel.setVisible(false);
+
                     CurrentUser = user;
                     Boolean DeadlineAlert =false;
                     for (Task task : user.tasks) {
@@ -225,8 +281,12 @@ public class Controller implements  Listupdater{
         });
     }
 
-    public void printinalltasks(Task f){
-        printTask(f,allTasksList);
+    public void printinalltasks(){
+        taskBox.setValue(new User("",""));
+        allTasksList.getItems().clear();
+        for(Task task : allTasks){
+            printTask(task,allTasksList);
+        }
     }
 
 
@@ -236,9 +296,13 @@ public class Controller implements  Listupdater{
         listupdater= this;
         addNewTaskBT.setVisible(false);
         addNewUserBT.setVisible(false);
+        viewAllTasksBT.setVisible(false);
+        taskBox.setVisible(false);
+        TaskBokLabel.setVisible(false);
 
 
-/*test part*/
+
+        /*test part*/
 //        Task t1 = new Task("L",1,LocalDate.of(2024, 4, 28),"sdkhbakhshvc");
 //        Task t2 = new Task("p",2,LocalDate.of(2024, 4, 27),"sdkhbakhghshvc");
 //        Task t3 = new Task("K",3,LocalDate.of(2024, 4, 27),"sdkhbakhljshvc");
