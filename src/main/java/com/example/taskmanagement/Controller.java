@@ -3,6 +3,7 @@ package com.example.taskmanagement;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
@@ -232,6 +233,49 @@ public class Controller implements  Listupdater{
 
     @FXML
     void startSprintHandler(MouseEvent event) {
+        if(myDayList.getSelectionModel().getSelectedItem()==null){
+            showAlert("no task","No task is selected.", Alert.AlertType.ERROR);
+            return;}
+
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("sprint.fxml"));
+            Parent root1 = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setTitle("sprint");
+            stage.setScene(new Scene(root1));
+            stage.show();
+        }
+        catch(Exception e){
+            System.out.println("cant load");
+        }
+
+    }
+
+    public void removeDay(){
+
+        myDayList.getItems().remove(myDayList.getSelectionModel().getSelectedItem());
+    }
+    public void removeFromAllTasks(){
+        Task currentTask=myDayList.getSelectionModel().getSelectedItem();
+        allTasksList.getItems().remove(currentTask);
+        allTasks.remove(currentTask);
+
+        if(CurrentUser!=null){
+            CurrentUser.tasks.remove(currentTask);}
+        else {
+            User u=null;
+            for (User x: allUsers) {
+                for (Task t: x.tasks) {
+                    if(t==currentTask){
+                        u=x;
+                        break;
+                    }
+                }
+            }
+            u.tasks.remove(currentTask);
+        }
+
+
 
     }
 
