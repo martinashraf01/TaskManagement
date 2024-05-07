@@ -274,9 +274,8 @@ public class Controller implements  Listupdater{
             }
             u.tasks.remove(currentTask);
         }
-
-
-
+        //Database delete
+        DatabaseController.deleteTaskDatabase(currentTask);
     }
 
     public static User getUser(String username){

@@ -5,10 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="526fa3c2-7c9d-4511-bb11-e95ea35287b3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/taskmanagement/SprintController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/taskmanagement/sprint.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/taskmanagement/DatabaseController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/taskmanagement/AddNewTaskController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/taskmanagement/AddNewTaskController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/taskmanagement/AddNewUserWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/taskmanagement/AddNewUserWindowController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/taskmanagement/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/taskmanagement/App.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/taskmanagement/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/taskmanagement/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/taskmanagement/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/taskmanagement/Task.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,14 +51,17 @@
     "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/SIGMA/Desktop/TaskManagement",
-    "project.structure.last.edited": "SDKs",
+    "last_opened_file_path": "D:/mysql-connector-j-8.3.0.jar",
+    "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.2"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.example.taskmanagement" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.example.taskmanagement" />
     </key>
   </component>
@@ -87,5 +95,16 @@
       <updated>1713798474698</updated>
     </task>
     <servers />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/taskmanagement/DatabaseController.java</url>
+          <line>96</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

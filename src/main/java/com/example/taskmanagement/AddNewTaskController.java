@@ -56,6 +56,9 @@ public class AddNewTaskController implements Initializable {
             Controller.allTasks.add(t);
             ((Controller)(Controller.listupdater)).printinalltasks();
 
+            //Database
+            DatabaseController.addTaskDatabase(t,currentUser);
+
             Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
             stage.close();
         }

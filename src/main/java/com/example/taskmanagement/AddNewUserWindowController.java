@@ -47,6 +47,8 @@ public class AddNewUserWindowController {
             return;
         }
 
+        DatabaseController.addUserDatabase(new User(username,password));
+
         Controller.allUsers.add(new User(username,password));
         Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
         stage.close();

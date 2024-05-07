@@ -12,8 +12,8 @@ public class Task implements Comparable<Task>{
 
 
     public Task(String taskName, int priority, LocalDate deadLine ,String taskDiscription) {
-        taskID = count;
         count++;
+        taskID = count;
         this.taskName = taskName;
         this.priority = priority;
         this.deadLine = deadLine;
@@ -36,6 +36,27 @@ public class Task implements Comparable<Task>{
     static int getCount(){
         return count;
     }
+
+    public int getTaskID() {
+        return taskID;
+    }
+    public String getTaskDiscription() {
+        return taskDiscription;
+    }
+
+    public int getPriority() {
+        return priority;
+    }
+
+    public LocalDate getDeadLine() {
+        return deadLine;
+    }
+
+    public String getTaskName() {
+        return taskName;
+    }
+
+    static void setCount(int x){ count =x;}
 
 }
 
