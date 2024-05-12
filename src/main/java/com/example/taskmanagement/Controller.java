@@ -91,8 +91,19 @@ public class Controller implements  Listupdater{
 
     @FXML
     void addTomyDayHandler(MouseEvent event) {
+        boolean isFound = false;
         Task selectedTask = allTasksList.getSelectionModel().getSelectedItem();
-        if(selectedTask != null) printTask(selectedTask,myDayList);
+        if(selectedTask != null){
+
+            for (Task task : myDayList.getItems()) {
+                if (task.equals(selectedTask)) {
+                    isFound = true;
+                    break;
+                }
+            }
+            if(!isFound)
+            printTask(selectedTask,myDayList);
+        }
     }
 
     public static String taskname=null;
